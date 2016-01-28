@@ -2,6 +2,7 @@ package application;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -73,6 +74,8 @@ public class Main extends Application {
 		        long t2;
 		        long diff;
 		        long interval = 200000000;
+		        boolean isBattle = false;
+		        Battle b = new Battle();
 		        //long interval = 70000000;
 
 	            public void handle(long currentNanoTime)
@@ -81,12 +84,20 @@ public class Main extends Application {
 	            	//try {
 	                // Clear the canvas
 	                //gc.clearRect(0, 0, 720,480);
-	            	TileEngine te = new TileEngine();https://vid.me/2kiE
+
+	            	
+
+	            	System.out.println(isBattle);
+
+	            	if(isBattle == false){
+
+	            	TileEngine te = new TileEngine();
+
 	            	te.generateTiles(gc);
 
 
 	                if (input.contains("LEFT")){
-	                	https://vid.me/2kiE
+	                	
 	                	t2 = System.nanoTime();
 	                	diff = t2 - t1;
 	                	//System.out.println(diff);
@@ -107,13 +118,20 @@ public class Main extends Application {
 	                	}
 	                	e.moveLeft();
 	                	e.direction = "LEFT";
+		            	Random rand = new Random();
+		            	int randInt = rand.nextInt(2000) + 1;
+		            	if(randInt < 10){
+
+		            		isBattle = true;
+
+		            	}
 	                }
 
 	                if (input.contains("RIGHT")){
 
 	                	t2 = System.nanoTime();
 	                	diff = t2 - t1;
-	                	System.out.println(diff);
+	                	//System.out.println(diff);
 	                	if(diff < interval){
 	                		gc.drawImage(e.emerald_right_1,e.posX,e.posY,e.width,e.height);
 	                	}
@@ -136,7 +154,7 @@ public class Main extends Application {
 
 	                	t2 = System.nanoTime();
 	                	diff = t2 - t1;
-	                	System.out.println(diff);
+	                	//System.out.println(diff);
 	                	if(diff < interval){
 	                		gc.drawImage(e.emerald_up_1,e.posX,e.posY,e.width,e.height);
 	                	}
@@ -159,7 +177,7 @@ public class Main extends Application {
 
 	                	t2 = System.nanoTime();
 	                	diff = t2 - t1;
-	                	System.out.println(diff);
+	                	//System.out.println(diff);
 	                	if(diff < interval){
 	                		gc.drawImage(e.emerald_down_1,e.posX,e.posY,e.width,e.height);
 	                	}
@@ -193,6 +211,19 @@ public class Main extends Application {
 	                    gc.drawImage(e.emerald_down_rest,e.posX,e.posY,e.width,e.height);
 	                }
 
+	            	}//if statement
+
+	            	if(isBattle == true){
+
+	            		if(b.isBattleStart == false){
+	            			b.startTimer();
+	            			b.setIsBattleStart(true);
+	            		}
+	            		//System.out.println(isBattle);
+	            		b.updateBattle(gc);
+	            		isBattle = b.checkBattleOver();
+	            		
+	            	}
 	            }
 	        }.start();
 

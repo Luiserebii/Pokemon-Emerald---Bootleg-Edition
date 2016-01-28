@@ -34,7 +34,7 @@ public class TileEngine {
 		for(int i = 0; i < mapLength; i++){
 			for(int j = 0; j < mapWidth; j++){
 
-				System.out.println(j*tileWidth + "    " + i*tileLength);
+				//System.out.println(j*tileWidth + "    " + i*tileLength);
 
 				if(tileMap[i][j] == 0){
 
