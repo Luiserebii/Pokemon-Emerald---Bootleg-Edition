@@ -8,6 +8,9 @@ public class Battle {
 
 	Image grassBattle = new Image("file:images/grass_battle.png");
 	Image battleBox = new Image("file:images/battle_box.png");
+	
+	Image HPBox1 = new Image("file:images/hp_box_1.png"); //goes on the right - main
+	Image HPBox2 = new Image("file:images/hp_box_2.png"); //
 	long t1;
 	long t2;
 	boolean isBattleStart;
@@ -35,6 +38,8 @@ public class Battle {
 
 		gc.drawImage(grassBattle,0,0);
 		gc.drawImage(battleBox,0,336);
+		gc.drawImage(HPBox2,39,48);
+		gc.drawImage(HPBox1,378,222);
 
 	}
 
