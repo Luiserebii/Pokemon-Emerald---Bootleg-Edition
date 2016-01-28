@@ -17,7 +17,7 @@ public class TileEngine {
 		{0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0, 0, 7, 7, 7, 0, 0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	};
+	}; //tileMap - may move on to text reading method instead
 
 	Image regTile = new Image("file:images/reg_tile_scaled.png");
 	Image grassTile = new Image("file:images/grass_tile.png");
@@ -31,8 +31,8 @@ public class TileEngine {
 		int mapLength = tileMap.length;
 		int mapWidth = tileMap[0].length;
 
-		for(int i = 0; i < mapLength; i++){
-			for(int j = 0; j < mapWidth; j++){
+		for(int i = 0; i < mapLength; i++){ //for each column
+			for(int j = 0; j < mapWidth; j++){ //for each row
 
 				//System.out.println(j*tileWidth + "    " + i*tileLength);
 

@@ -26,19 +26,19 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Group root = new Group();
+			Group root = new Group(); //Making Group to add Canvas to
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("Pokémon Emerald - Bootleg Edition");
+			primaryStage.setTitle("Pokémon Emerald - Bootleg Edition"); //all stuff you know ^^^
 
 
-	        Canvas canvas = new Canvas(720,480); //500
+	        Canvas canvas = new Canvas(720,480); //Based on GBA Resolution
 	        root.getChildren().add(canvas);
 
-	        ArrayList<String> input = new ArrayList<String>();
+	        ArrayList<String> input = new ArrayList<String>(); //I suppose gets input through ArrayList... is this necessary?
 
-	        scene.setOnKeyPressed(
+	        scene.setOnKeyPressed( //May or may not want to look into how this works, maybe move into other class
 	            new EventHandler<KeyEvent>()
 	            {
 	                public void handle(KeyEvent e)
@@ -67,15 +67,16 @@ public class Main extends Application {
 
 
 
-	        new AnimationTimer()
+	        new AnimationTimer() //Game loop; May move into other class?
 	        {
 
-		        long t1 = System.nanoTime();
-		        long t2;
+		        long t1 = System.nanoTime(); //Gets total time elapsed in nanoseconds, so early value
+		        long t2; //to be initialized as later value to compare (t2-t1)
 		        long diff;
 		        long interval = 200000000;
 		        boolean isBattle = false;
 		        Battle b = new Battle();
+		        Random rand = new Random();
 		        //long interval = 70000000;
 
 	            public void handle(long currentNanoTime)
@@ -85,11 +86,11 @@ public class Main extends Application {
 	                // Clear the canvas
 	                //gc.clearRect(0, 0, 720,480);
 
-	            	
+
 
 	            	System.out.println(isBattle);
 
-	            	if(isBattle == false){
+	            	if(isBattle == false){ //If there is no battle, make tiles and check for input
 
 	            	TileEngine te = new TileEngine();
 
@@ -97,9 +98,9 @@ public class Main extends Application {
 
 
 	                if (input.contains("LEFT")){
-	                	
+
 	                	t2 = System.nanoTime();
-	                	diff = t2 - t1;
+	                	diff = t2 - t1; //check time elapsed, reset t1 if gets too late
 	                	//System.out.println(diff);
 	                	if(diff < interval){
 	                		gc.drawImage(e.emerald_left_1,e.posX,e.posY,e.width,e.height);
@@ -118,7 +119,7 @@ public class Main extends Application {
 	                	}
 	                	e.moveLeft();
 	                	e.direction = "LEFT";
-		            	Random rand = new Random();
+
 		            	int randInt = rand.nextInt(2000) + 1;
 		            	if(randInt < 10){
 
@@ -149,6 +150,13 @@ public class Main extends Application {
 	                	}
 	                	e.moveRight();
 	                	e.direction = "RIGHT";
+
+		            	int randInt = rand.nextInt(2000) + 1;
+		            	if(randInt < 10){
+
+		            		isBattle = true;
+
+		            	}
 	                }
 	                if (input.contains("UP")){
 
@@ -172,6 +180,13 @@ public class Main extends Application {
 	                	}
 	                	e.moveUp();
 	                	e.direction = "UP";
+
+		            	int randInt = rand.nextInt(2000) + 1;
+		            	if(randInt < 10){
+
+		            		isBattle = true;
+
+		            	}
 	                }
 	                if (input.contains("DOWN")){
 
@@ -195,6 +210,13 @@ public class Main extends Application {
 	                	}
 	                	e.moveDown();
 	                	e.direction = "DOWN";
+
+		            	int randInt = rand.nextInt(2000) + 1;
+		            	if(randInt < 10){
+
+		            		isBattle = true;
+
+		            	}
 	                }
 
 
@@ -215,14 +237,14 @@ public class Main extends Application {
 
 	            	if(isBattle == true){
 
-	            		if(b.isBattleStart == false){
+	            		if(b.isBattleStart == false){ //Do we really need isBattle and isBattleStart???
 	            			b.startTimer();
 	            			b.setIsBattleStart(true);
 	            		}
 	            		//System.out.println(isBattle);
 	            		b.updateBattle(gc);
 	            		isBattle = b.checkBattleOver();
-	            		
+
 	            	}
 	            }
 	        }.start();

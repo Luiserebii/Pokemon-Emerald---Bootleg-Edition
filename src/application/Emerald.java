@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 
 public class Emerald {
 
-	Image emerald_down_rest;
+	Image emerald_down_rest; //Do we really need all these defs? Maybe for later project, figure out easier way
 	Image emerald_down_1;
 	Image emerald_down_2;
 	Image emerald_left_rest;
