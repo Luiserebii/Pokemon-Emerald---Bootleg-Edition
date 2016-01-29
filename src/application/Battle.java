@@ -21,6 +21,7 @@ public class Battle { //Really messy class, needs to be developed
 	Image emeraldBattle4 = new Image("file:images/emerald_battle_4.png");
 
 	Image pokemon = new Image("file:images/261_scaled.gif");
+	Image pokemonBack;
 	int num;
 
 	Image HPBox1 = new Image("file:images/hp_box_1.png"); //goes on the right - main
@@ -31,6 +32,7 @@ public class Battle { //Really messy class, needs to be developed
 	boolean isReadyForTG2;
 	boolean isTrainerGrass3;
 	boolean isTrainerGrass4;
+	boolean isEncounterAct;
 	long t1;
 	long t2;
 	int trainerXPos;
@@ -52,12 +54,14 @@ public class Battle { //Really messy class, needs to be developed
 		g1x = 732;//720,
 		g2x = -384; //384. + 21 if @ 3
 		randomPokemon();
+		randomPokemonBack();
 		isTrainerGrass1 = true;
 		isTrainerGrass2 = false;
 		isReadyForTG2 = false;
 		isTrainerGrass3 = false;
 		isTrainerGrass4 = false;
-		trainerSpeed = 1; //6
+		isEncounterAct = false;
+		trainerSpeed = 6; //6
 	}
 
 	public void updateBattle(GraphicsContext gc){
@@ -155,6 +159,23 @@ public class Battle { //Really messy class, needs to be developed
 
 		}
 
+		if(isTrainerGrass4 && (trainerXPos) <= -300){
+
+			isTrainerGrass4 = false;
+			isEncounterAct = true;
+
+		}
+
+		if(isEncounterAct){
+
+			int pokemonOffset = (int) (grassBattleGrass2.getWidth() - pokemon.getWidth())/2;
+			gc.drawImage(pokemon,g2x+pokemonOffset,215-pokemon.getHeight()); //drawPokemon
+
+			int pokemonOffset2 = (int) (grassBattleGrass1.getWidth() - pokemonBack.getWidth())/2;
+			gc.drawImage(pokemonBack,g1x+pokemonOffset2+30,350-pokemonBack.getHeight()); //drawPokemon
+
+		}
+
 //		if(g2x < 336 || g1x > 12){
 //
 //			isTrainerGrass1 = true;
@@ -218,7 +239,12 @@ public class Battle { //Really messy class, needs to be developed
 
 	}
 
+	public void randomPokemonBack(){
 
+		num = new Random().nextInt(386) + 1;
+		pokemonBack = new Image("file:images/pokemon_back_sprites/" + num + ".png");
+
+	}
 
 
 
