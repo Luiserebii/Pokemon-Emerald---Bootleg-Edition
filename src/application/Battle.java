@@ -16,6 +16,9 @@ public class Battle { //Really messy class, needs to be developed
 	Image battleBox = new Image("file:images/battle_box.png");
 
 	Image emeraldBattle1 = new Image("file:images/emerald_battle_1.png");
+	Image emeraldBattle2 = new Image("file:images/emerald_battle_2.png");
+	Image emeraldBattle3 = new Image("file:images/emerald_battle_3.png");
+	Image emeraldBattle4 = new Image("file:images/emerald_battle_4.png");
 
 	Image pokemon = new Image("file:images/261_scaled.gif");
 	int num;
@@ -23,8 +26,15 @@ public class Battle { //Really messy class, needs to be developed
 	Image HPBox1 = new Image("file:images/hp_box_1.png"); //goes on the right - main
 	Image HPBox2 = new Image("file:images/hp_box_2.png"); //
 	boolean isBattleStart;
+	boolean isTrainerGrass1;
+	boolean isTrainerGrass2;
+	boolean isReadyForTG2;
+	boolean isTrainerGrass3;
+	boolean isTrainerGrass4;
 	long t1;
 	long t2;
+	int trainerXPos;
+	int trainerSpeed;
 
 	int g1x = 720;
 	int g2x = -396;
@@ -42,6 +52,12 @@ public class Battle { //Really messy class, needs to be developed
 		g1x = 732;//720,
 		g2x = -384; //384. + 21 if @ 3
 		randomPokemon();
+		isTrainerGrass1 = true;
+		isTrainerGrass2 = false;
+		isReadyForTG2 = false;
+		isTrainerGrass3 = false;
+		isTrainerGrass4 = false;
+		trainerSpeed = 1; //6
 	}
 
 	public void updateBattle(GraphicsContext gc){
@@ -50,31 +66,120 @@ public class Battle { //Really messy class, needs to be developed
 
 		//System.out.println("VALUE DIFF OF BATTLE" + (t2-t1));
 
-		if((t2 - t1) > 10000000000L){
+		if((t2 - t1) > 15000000000L){
 			 isBattleStart = false;
 		}
 
-		if(g1x > 12){
-
-			g1x = g1x - 3;
-		}
-
-		if(g2x < 336){
-
-			g2x = g2x + 3;
-		}
-		System.out.println(g1x + "     " + g2x);
+//		if(g1x > 12){
+//
+//			g1x = g1x - 3;
+//		}
+//
+//		if(g2x < 336){
+//
+//			g2x = g2x + 3;
+//		}
+		//System.out.println(g1x + "     " + g2x);
+		//System.out.println(isReadyForTG2);
 		gc.drawImage(grassBattleBackground,0,0);
 		gc.drawImage(grassBattleGrass1,g1x,303);
 		gc.drawImage(grassBattleGrass2,g2x,144);
-		int pokemonOffset = (int) (grassBattleGrass2.getWidth() - pokemon.getWidth())/2;
-		gc.drawImage(pokemon,g2x+pokemonOffset,215-pokemon.getHeight());//87 //g2x+90.5,104 //decided just to do simple alg, too complicated to be precise
-		gc.drawImage(emeraldBattle1,g1x + 186,180);
+
+		if(isTrainerGrass1){
+
+			g1x = g1x - 3; //moving grassBattleGrass
+			g2x = g2x + 3;
+
+			int pokemonOffset = (int) (grassBattleGrass2.getWidth() - pokemon.getWidth())/2;
+			gc.drawImage(pokemon,g2x+pokemonOffset,215-pokemon.getHeight());//87 //g2x+90.5,104 //decided just to do simple alg, too complicated to be precise
+
+			gc.drawImage(emeraldBattle1,g1x + 186,180);
+
+		}
+
+		if(isTrainerGrass1 && (g2x > 333 && g1x < 15)){ //if TrainerGrass1 and grassBattle is in final position
+
+			isTrainerGrass1 = false;
+			isTrainerGrass2 = true;
+
+		}
+
+		if(isTrainerGrass2 && !isReadyForTG2){
+
+			int pokemonOffset = (int) (grassBattleGrass2.getWidth() - pokemon.getWidth())/2; //draws Pokemon
+			gc.drawImage(pokemon,g2x+pokemonOffset,215-pokemon.getHeight()); //draws Pokemon
+			gc.drawImage(emeraldBattle1,g1x + 186,180); //draws static Trainer
+			trainerXPos = 138;
+		}
+
+		if(isTrainerGrass2 && isReadyForTG2){
+
+			int pokemonOffset = (int) (grassBattleGrass2.getWidth() - pokemon.getWidth())/2;
+			gc.drawImage(pokemon,g2x+pokemonOffset,215-pokemon.getHeight());
+			trainerXPos = trainerXPos - trainerSpeed; //move Trainer
+			//trainerSpeed++;
+			gc.drawImage(emeraldBattle2,trainerXPos,183); //draw Trainer moving
+		}
+
+		if(isTrainerGrass2 && (trainerXPos) <= 0){
+
+			isTrainerGrass2 = false;
+			isReadyForTG2 = false;
+			isTrainerGrass3 = true;
+		}
+
+		if(isTrainerGrass3){
+
+			int pokemonOffset = (int) (grassBattleGrass2.getWidth() - pokemon.getWidth())/2;
+			gc.drawImage(pokemon,g2x+pokemonOffset,215-pokemon.getHeight());
+			trainerXPos = trainerXPos - trainerSpeed;
+			//trainerSpeed++;
+			gc.drawImage(emeraldBattle3,trainerXPos,186); //drawTrainer3 moving
+
+		}
+
+		if(isTrainerGrass3 && (trainerXPos) <= -108){
+
+			isTrainerGrass3 = false;
+			isTrainerGrass4 = true;
+
+		}
+
+		if(isTrainerGrass4){
+
+			int pokemonOffset = (int) (grassBattleGrass2.getWidth() - pokemon.getWidth())/2;
+			gc.drawImage(pokemon,g2x+pokemonOffset,215-pokemon.getHeight()); //drawPokemon
+			trainerXPos = trainerXPos - trainerSpeed;
+			//trainerSpeed++;
+			gc.drawImage(emeraldBattle4,trainerXPos,189); //drawTrainer4 moving
+
+		}
+
+//		if(g2x < 336 || g1x > 12){
+//
+//			isTrainerGrass1 = true;
+//			int pokemonOffset = (int) (grassBattleGrass2.getWidth() - pokemon.getWidth())/2;
+//			gc.drawImage(pokemon,g2x+pokemonOffset,215-pokemon.getHeight());//87 //g2x+90.5,104 //decided just to do simple alg, too complicated to be precise
+//
+//			gc.drawImage(emeraldBattle1,g1x + 186,180);
+//		}
+//
+//
+//
+//
+//		if(g2x > 333 && g1x < 15){
+//
+//			int pokemonOffset = (int) (grassBattleGrass2.getWidth() - pokemon.getWidth())/2;
+//			gc.drawImage(pokemon,g2x+pokemonOffset,215-pokemon.getHeight());
+//			i++;
+//			gc.drawImage(emeraldBattle2,138-i,183); //g1x + 186 - i
+//		}
 
 
 		gc.drawImage(battleBox,0,336);
 		//gc.drawImage(HPBox2,39,48);
 		//gc.drawImage(HPBox1,378,222);
+
 
 	}
 
@@ -93,7 +198,17 @@ public class Battle { //Really messy class, needs to be developed
 
 	}
 
+	public void setIsReadyForTG2(boolean inIsReadyTG2){
 
+		isReadyForTG2 = inIsReadyTG2;
+
+	}
+
+	public void moveTrainer(){
+
+		trainerSpeed = 2;
+
+	}
 
 
 	public void randomPokemon(){

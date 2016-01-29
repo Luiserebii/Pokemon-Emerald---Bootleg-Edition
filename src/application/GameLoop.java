@@ -1,6 +1,7 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 import javafx.animation.AnimationTimer;
@@ -31,6 +32,8 @@ public class GameLoop extends AnimationTimer {
     public void handle(long currentNanoTime){ //code of start, handle called by .start()
 
     	//System.out.println(isBattle);
+
+    	//System.out.println(Arrays.toString(input.toArray()));
 
     	if(isBattle == false){ //If there is no battle, make tiles and check for input
 
@@ -182,6 +185,12 @@ public class GameLoop extends AnimationTimer {
     			b.startTimer();
     			b.setIsBattleStart(true);
     		}
+    		
+            if(input.contains("Z")){
+
+            	b.setIsReadyForTG2(true);
+
+            }
     		//System.out.println(isBattle);
     		b.updateBattle(gc);
     		isBattle = b.checkBattleOver();
