@@ -28,10 +28,9 @@ public class GameLoop extends AnimationTimer {
     }
 
 
-    public void handle(long currentNanoTime)
-    {
+    public void handle(long currentNanoTime){ //code of start, handle called by .start()
 
-    	System.out.println(isBattle);
+    	//System.out.println(isBattle);
 
     	if(isBattle == false){ //If there is no battle, make tiles and check for input
 

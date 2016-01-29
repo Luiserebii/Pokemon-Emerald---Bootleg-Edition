@@ -59,10 +59,9 @@ public class Main extends Application {
 	                }
 	            });
 
-	        GraphicsContext gc = canvas.getGraphicsContext2D();
-
+	        
+	        GraphicsContext gc = canvas.getGraphicsContext2D(); //You could make this in GameLoop...?
 	        Emerald e = new Emerald(50,50,4,0.43);
-
 
 	        GameLoop gl = new GameLoop(input,gc,e);
 	        gl.start();
