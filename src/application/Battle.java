@@ -30,13 +30,19 @@ public class Battle { //Really messy class, needs to be developed
 	boolean isTrainerGrass1;
 	boolean isTrainerGrass2;
 	boolean isReadyForTG2;
+	boolean isReadyHPBox;
 	boolean isTrainerGrass3;
 	boolean isTrainerGrass4;
 	boolean isEncounterAct;
+	boolean isReadyHPBox2;
 	long t1;
 	long t2;
 	int trainerXPos;
 	int trainerSpeed;
+	int HPBoxXPos;
+	int HPBoxSpeed;
+	int HPBoxXPos2;
+	int HPBoxSpeed2;
 
 	int g1x = 720;
 	int g2x = -396;
@@ -58,10 +64,17 @@ public class Battle { //Really messy class, needs to be developed
 		isTrainerGrass1 = true;
 		isTrainerGrass2 = false;
 		isReadyForTG2 = false;
+		isReadyHPBox = false;
 		isTrainerGrass3 = false;
 		isTrainerGrass4 = false;
 		isEncounterAct = false;
+		isReadyHPBox = false;
+		isReadyHPBox2 = false;
 		trainerSpeed = 6; //6
+		HPBoxXPos2 = -300;
+		HPBoxSpeed2 = 6;
+		HPBoxXPos = 720;
+		HPBoxSpeed = 6;
 	}
 
 	public void updateBattle(GraphicsContext gc){
@@ -108,21 +121,41 @@ public class Battle { //Really messy class, needs to be developed
 
 		}
 
-		if(isTrainerGrass2 && !isReadyForTG2){
+		if(isTrainerGrass2 && !isReadyHPBox2 && !isReadyForTG2){
 
 			int pokemonOffset = (int) (grassBattleGrass2.getWidth() - pokemon.getWidth())/2; //draws Pokemon
 			gc.drawImage(pokemon,g2x+pokemonOffset,215-pokemon.getHeight()); //draws Pokemon
 			gc.drawImage(emeraldBattle1,g1x + 186,180); //draws static Trainer
 			trainerXPos = 138;
+
+			HPBoxXPos2 = HPBoxXPos2 + HPBoxSpeed2;
+			gc.drawImage(HPBox2,HPBoxXPos2,48);//39
 		}
 
-		if(isTrainerGrass2 && isReadyForTG2){
+		if(isTrainerGrass2 && !isReadyHPBox2 && (HPBoxXPos2) >= 39){
+
+			isReadyHPBox2 = true;
+
+		}
+
+		if(isTrainerGrass2 && isReadyHPBox2 && !isReadyForTG2){
+
+			int pokemonOffset = (int) (grassBattleGrass2.getWidth() - pokemon.getWidth())/2; //draws Pokemon
+			gc.drawImage(pokemon,g2x+pokemonOffset,215-pokemon.getHeight()); //draws Pokemon
+			gc.drawImage(emeraldBattle1,g1x + 186,180); //draws static Trainer
+
+			gc.drawImage(HPBox2,HPBoxXPos2,48);
+		}
+
+		if(isTrainerGrass2 && isReadyForTG2 && isReadyHPBox2){
 
 			int pokemonOffset = (int) (grassBattleGrass2.getWidth() - pokemon.getWidth())/2;
 			gc.drawImage(pokemon,g2x+pokemonOffset,215-pokemon.getHeight());
 			trainerXPos = trainerXPos - trainerSpeed; //move Trainer
 			//trainerSpeed++;
 			gc.drawImage(emeraldBattle2,trainerXPos,183); //draw Trainer moving
+
+			gc.drawImage(HPBox2,HPBoxXPos2,48);
 		}
 
 		if(isTrainerGrass2 && (trainerXPos) <= 0){
@@ -140,6 +173,7 @@ public class Battle { //Really messy class, needs to be developed
 			//trainerSpeed++;
 			gc.drawImage(emeraldBattle3,trainerXPos,186); //drawTrainer3 moving
 
+			gc.drawImage(HPBox2,HPBoxXPos2,48);
 		}
 
 		if(isTrainerGrass3 && (trainerXPos) <= -108){
@@ -157,6 +191,8 @@ public class Battle { //Really messy class, needs to be developed
 			//trainerSpeed++;
 			gc.drawImage(emeraldBattle4,trainerXPos,189); //drawTrainer4 moving
 
+			gc.drawImage(HPBox2,HPBoxXPos2,48);
+
 		}
 
 		if(isTrainerGrass4 && (trainerXPos) <= -300){
@@ -166,7 +202,7 @@ public class Battle { //Really messy class, needs to be developed
 
 		}
 
-		if(isEncounterAct){
+		if(isEncounterAct && !isReadyHPBox){
 
 			int pokemonOffset = (int) (grassBattleGrass2.getWidth() - pokemon.getWidth())/2;
 			gc.drawImage(pokemon,g2x+pokemonOffset,215-pokemon.getHeight()); //drawPokemon
@@ -174,7 +210,34 @@ public class Battle { //Really messy class, needs to be developed
 			int pokemonOffset2 = (int) (grassBattleGrass1.getWidth() - pokemonBack.getWidth())/2;
 			gc.drawImage(pokemonBack,g1x+pokemonOffset2+30,350-pokemonBack.getHeight()); //drawPokemon
 
+			HPBoxXPos = HPBoxXPos - HPBoxSpeed;
+			System.out.println(HPBoxXPos);
+			gc.drawImage(HPBox2,HPBoxXPos2,48);
+			gc.drawImage(HPBox1,HPBoxXPos,222);
+
 		}
+
+		if(isEncounterAct && !isReadyHPBox && HPBoxXPos <= 378){
+
+			isReadyHPBox = true;
+		}
+
+		if(isEncounterAct && isReadyHPBox){
+
+			int pokemonOffset = (int) (grassBattleGrass2.getWidth() - pokemon.getWidth())/2;
+			gc.drawImage(pokemon,g2x+pokemonOffset,215-pokemon.getHeight()); //drawPokemon
+
+			int pokemonOffset2 = (int) (grassBattleGrass1.getWidth() - pokemonBack.getWidth())/2;
+			gc.drawImage(pokemonBack,g1x+pokemonOffset2+30,350-pokemonBack.getHeight()); //drawPokemon
+
+			gc.drawImage(HPBox2,HPBoxXPos2,48);
+			gc.drawImage(HPBox1,HPBoxXPos,222);
+
+		}
+
+
+
+
 
 //		if(g2x < 336 || g1x > 12){
 //
