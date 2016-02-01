@@ -6,7 +6,7 @@ import javafx.scene.canvas.GraphicsContext;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static application.Direction.*;
+import static java.util.stream.Stream.of;
 
 class GameLoop extends AnimationTimer {
 
@@ -38,121 +38,27 @@ class GameLoop extends AnimationTimer {
 			TileEngine te = new TileEngine();
 			te.generateTiles(gc);
 
-			if (input.contains("LEFT")) {
-				t2 = System.nanoTime();
-				diff = t2 - t1; //check time elapsed, reset t1 if gets too late
-				//System.out.println(diff);
-				if (diff < interval) {
-					gc.drawImage(e.emerald_left_1, e.posX, e.posY, e.width, e.height);
-				}
-				if (diff > interval && diff < interval * 2) {
-					gc.drawImage(e.emerald_left_rest, e.posX, e.posY, e.width, e.height);
-				}
-				if (diff > interval * 2 && diff < interval * 3) {
-					gc.drawImage(e.emerald_left_2, e.posX, e.posY, e.width, e.height);
-				}
-				if (diff > interval * 3) {
-					gc.drawImage(e.emerald_left_rest, e.posX, e.posY, e.width, e.height);
-				}
-				if (diff > interval * 4) {
-					t1 = System.nanoTime();
-				}
-				e.moveLeft();
-				e.direction = LEFT;
+			Direction dir = of(Direction.cachedValues).filter(v -> input.contains(v.name())).findFirst()
+					.orElseThrow(() -> new IllegalStateException("Could not find direction for input \"" + input + "\""));
 
-				int randInt = ThreadLocalRandom.current().nextInt(2000) + 1;
-				if (randInt < 10) {
-					isBattle = true;
-				}
-			}
+			t2 = System.nanoTime();
+			diff = t2 - t1; //check time elapsed, reset t1 if gets too late
+			//System.out.println(diff);
+			t2 = System.nanoTime();
+			diff = t2 - t1;
 
-			if (input.contains("RIGHT")) {
-				t2 = System.nanoTime();
-				diff = t2 - t1;
-				//System.out.println(diff);
-				if (diff < interval) {
-					gc.drawImage(e.emerald_right_1, e.posX, e.posY, e.width, e.height);
-				}
-				if (diff > interval && diff < interval * 2) {
-					gc.drawImage(e.emerald_right_rest, e.posX, e.posY, e.width, e.height);
-				}
-				if (diff > interval * 2 && diff < interval * 3) {
-					gc.drawImage(e.emerald_right_2, e.posX, e.posY, e.width, e.height);
-				}
-				if (diff > interval * 3) {
-					gc.drawImage(e.emerald_right_rest, e.posX, e.posY, e.width, e.height);
-				}
-				if (diff > interval * 4) {
-					t1 = System.nanoTime();
-				}
-				e.moveRight();
-				e.direction = RIGHT;
+			if (diff < interval) gc.drawImage(dir.image1.apply(e), e.posX, e.posY, e.width, e.height);
+			if (diff > interval && diff < interval * 2) gc.drawImage(dir.image.apply(e), e.posX, e.posY, e.width, e.height);
+			if (diff > interval * 2 && diff < interval * 3) gc.drawImage(dir.image2.apply(e), e.posX, e.posY, e.width, e.height);
+			if (diff > interval * 3) gc.drawImage(dir.image.apply(e), e.posX, e.posY, e.width, e.height);
+			if (diff > interval * 4) t1 = System.nanoTime();
+			dir.move.accept(e);
+			e.direction = dir;
 
-				int randInt = ThreadLocalRandom.current().nextInt(2000) + 1;
-				if (randInt < 10) {
-					isBattle = true;
-				}
-			}
-			if (input.contains("UP")) {
+			int randInt = ThreadLocalRandom.current().nextInt(2000) + 1;
+			if (randInt < 10) isBattle = true;
 
-				t2 = System.nanoTime();
-				diff = t2 - t1;
-				//System.out.println(diff);
-				if (diff < interval) {
-					gc.drawImage(e.emerald_up_1, e.posX, e.posY, e.width, e.height);
-				}
-				if (diff > interval && diff < interval * 2) {
-					gc.drawImage(e.emerald_up_rest, e.posX, e.posY, e.width, e.height);
-				}
-				if (diff > interval * 2 && diff < interval * 3) {
-					gc.drawImage(e.emerald_up_2, e.posX, e.posY, e.width, e.height);
-				}
-				if (diff > interval * 3) {
-					gc.drawImage(e.emerald_up_rest, e.posX, e.posY, e.width, e.height);
-				}
-				if (diff > interval * 4) {
-					t1 = System.nanoTime();
-				}
-				e.moveUp();
-				e.direction = UP;
-
-				int randInt = ThreadLocalRandom.current().nextInt(2000) + 1;
-				if (randInt < 10) {
-					isBattle = true;
-				}
-			}
-			if (input.contains("DOWN")) {
-
-				t2 = System.nanoTime();
-				diff = t2 - t1;
-				//System.out.println(diff);
-				if (diff < interval) {
-					gc.drawImage(e.emerald_down_1, e.posX, e.posY, e.width, e.height);
-				}
-				if (diff > interval && diff < interval * 2) {
-					gc.drawImage(e.emerald_down_rest, e.posX, e.posY, e.width, e.height);
-				}
-				if (diff > interval * 2 && diff < interval * 3) {
-					gc.drawImage(e.emerald_down_2, e.posX, e.posY, e.width, e.height);
-				}
-				if (diff > interval * 3) {
-					gc.drawImage(e.emerald_down_rest, e.posX, e.posY, e.width, e.height);
-				}
-				if (diff > interval * 4) {
-					t1 = System.nanoTime();
-				}
-				e.moveDown();
-				e.direction = DOWN;
-
-				int randInt = ThreadLocalRandom.current().nextInt(2000) + 1;
-				if (randInt < 10) {
-					isBattle = true;
-				}
-			}
-
-			if (input.size() == 0) {
-				gc.drawImage(e.direction.image.apply(e), e.posX, e.posY, e.width, e.height);
-			}
+			if (input.size() == 0) gc.drawImage(e.direction.image.apply(e), e.posX, e.posY, e.width, e.height);
 		}
 
 		if (isBattle) {
@@ -162,9 +68,7 @@ class GameLoop extends AnimationTimer {
 				b.setIsBattleStart(true);
 			}
 
-			if (input.contains("Z")) {
-				b.setIsReadyForTG2(true);
-			}
+			if (input.contains("Z")) b.setIsReadyForTG2(true);
 
 			//System.out.println(isBattle);
 			b.updateBattle(gc);
