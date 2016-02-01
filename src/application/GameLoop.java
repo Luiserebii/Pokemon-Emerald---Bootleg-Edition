@@ -150,20 +150,9 @@ class GameLoop extends AnimationTimer {
 				}
 			}
 
-
-			if (input.size() == 0 && LEFT == e.direction) {
-				gc.drawImage(e.emerald_left_rest, e.posX, e.posY, e.width, e.height);
+			if (input.size() == 0) {
+				gc.drawImage(e.direction.image.apply(e), e.posX, e.posY, e.width, e.height);
 			}
-			if (input.size() == 0 && RIGHT == e.direction) {
-				gc.drawImage(e.emerald_right_rest, e.posX, e.posY, e.width, e.height);
-			}
-			if (input.size() == 0 && UP == e.direction) {
-				gc.drawImage(e.emerald_up_rest, e.posX, e.posY, e.width, e.height);
-			}
-			if (input.size() == 0 && DOWN == e.direction) {
-				gc.drawImage(e.emerald_down_rest, e.posX, e.posY, e.width, e.height);
-			}
-
 		}
 
 		if (isBattle) {
