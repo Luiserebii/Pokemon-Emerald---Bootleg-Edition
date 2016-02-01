@@ -6,6 +6,8 @@ import javafx.scene.canvas.GraphicsContext;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
+import static application.Direction.*;
+
 class GameLoop extends AnimationTimer {
 
 	private long t1 = System.nanoTime(); //Gets total time elapsed in nanoseconds, so early value
@@ -56,7 +58,7 @@ class GameLoop extends AnimationTimer {
 					t1 = System.nanoTime();
 				}
 				e.moveLeft();
-				e.direction = "LEFT";
+				e.direction = LEFT;
 
 				int randInt = ThreadLocalRandom.current().nextInt(2000) + 1;
 				if (randInt < 10) {
@@ -84,7 +86,7 @@ class GameLoop extends AnimationTimer {
 					t1 = System.nanoTime();
 				}
 				e.moveRight();
-				e.direction = "RIGHT";
+				e.direction = RIGHT;
 
 				int randInt = ThreadLocalRandom.current().nextInt(2000) + 1;
 				if (randInt < 10) {
@@ -112,7 +114,7 @@ class GameLoop extends AnimationTimer {
 					t1 = System.nanoTime();
 				}
 				e.moveUp();
-				e.direction = "UP";
+				e.direction = UP;
 
 				int randInt = ThreadLocalRandom.current().nextInt(2000) + 1;
 				if (randInt < 10) {
@@ -140,7 +142,7 @@ class GameLoop extends AnimationTimer {
 					t1 = System.nanoTime();
 				}
 				e.moveDown();
-				e.direction = "DOWN";
+				e.direction = DOWN;
 
 				int randInt = ThreadLocalRandom.current().nextInt(2000) + 1;
 				if (randInt < 10) {
@@ -149,16 +151,16 @@ class GameLoop extends AnimationTimer {
 			}
 
 
-			if (input.size() == 0 && e.direction == "LEFT") {
+			if (input.size() == 0 && LEFT == e.direction) {
 				gc.drawImage(e.emerald_left_rest, e.posX, e.posY, e.width, e.height);
 			}
-			if (input.size() == 0 && e.direction == "RIGHT") {
+			if (input.size() == 0 && RIGHT == e.direction) {
 				gc.drawImage(e.emerald_right_rest, e.posX, e.posY, e.width, e.height);
 			}
-			if (input.size() == 0 && e.direction == "UP") {
+			if (input.size() == 0 && UP == e.direction) {
 				gc.drawImage(e.emerald_up_rest, e.posX, e.posY, e.width, e.height);
 			}
-			if (input.size() == 0 && e.direction == "DOWN") {
+			if (input.size() == 0 && DOWN == e.direction) {
 				gc.drawImage(e.emerald_down_rest, e.posX, e.posY, e.width, e.height);
 			}
 

@@ -5,6 +5,8 @@ import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
+import static application.Direction.DOWN;
+
 public class Emerald {
 
 	Image emerald_down_rest; //Do we really need all these defs? Maybe for later project, figure out easier way
@@ -25,7 +27,7 @@ public class Emerald {
 	int posX, posY;
 	int width, height;
 
-	String direction;
+	Direction direction;
 
 	public Emerald() {
 
@@ -48,7 +50,7 @@ public class Emerald {
 		posX = 50;
 		posY = 50;
 
-		direction = "DOWN";
+		direction = DOWN;
 
 		width = 100;
 		height = 150;
@@ -75,7 +77,7 @@ public class Emerald {
 		posX = inPosX;
 		posY = inPosY;
 
-		direction = "DOWN";
+		direction = DOWN;
 
 		width = (int) (100 * whMult);
 		height = (int) (150 * whMult);
@@ -102,5 +104,5 @@ public class Emerald {
 
 
 	}
-	
+
 }
