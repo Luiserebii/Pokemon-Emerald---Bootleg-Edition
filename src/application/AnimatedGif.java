@@ -1,20 +1,10 @@
 package application;
 
-import java.awt.image.BufferedImage;
-import java.net.URISyntaxException;
-
-import javafx.animation.Interpolator;
-import javafx.animation.Transition;
-import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
-import javafx.util.Duration;
+
+import java.awt.image.BufferedImage;
 
 public class AnimatedGif extends Animation {
 
@@ -36,4 +26,3 @@ public class AnimatedGif extends Animation {
     }
 
 }
-

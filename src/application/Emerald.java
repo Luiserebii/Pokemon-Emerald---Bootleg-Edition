@@ -1,9 +1,9 @@
 package application;
 
-import java.util.ArrayList;
-
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+
+import java.util.ArrayList;
 
 public class Emerald {
 
@@ -27,7 +27,7 @@ public class Emerald {
 
 	String direction;
 
-	public Emerald(){
+	public Emerald() {
 
 		emerald_down_rest = new Image("file:images/emerald_down_rest.png");
 		emerald_down_1 = new Image("file:images/emerald_down_1.png");
@@ -54,7 +54,7 @@ public class Emerald {
 		height = 150;
 	}
 
-	public Emerald(int inPosX, int inPosY, int speed, double whMult){
+	public Emerald(int inPosX, int inPosY, int speed, double whMult) {
 
 		emerald_down_rest = new Image("file:images/emerald_down_rest.png");
 		emerald_down_1 = new Image("file:images/emerald_down_1.png");
@@ -101,6 +101,6 @@ public class Emerald {
 	public void moveLogic(GraphicsContext gc, ArrayList<String> input, long t1, long t2, long diff, long interval) {
 
 
-
 	}
+	
 }
