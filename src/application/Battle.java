@@ -72,9 +72,9 @@ public class Battle { //Really messy class, needs to be developed
 		isReadyHPBox2 = false;
 		trainerSpeed = 6; //6
 		HPBoxXPos2 = -300;
-		HPBoxSpeed2 = 6;
+		HPBoxSpeed2 = 14;
 		HPBoxXPos = 720;
-		HPBoxSpeed = 6;
+		HPBoxSpeed = 14;
 	}
 
 	public void updateBattle(GraphicsContext gc){
