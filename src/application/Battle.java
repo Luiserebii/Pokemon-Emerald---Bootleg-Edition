@@ -3,7 +3,7 @@ package application;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Battle { //Really messy class, needs to be developed
 
@@ -277,12 +277,12 @@ public class Battle { //Really messy class, needs to be developed
 
 
 	public void randomPokemon() {
-		num = new Random().nextInt(386) + 1;
+		num = ThreadLocalRandom.current().nextInt(386) + 1;
 		pokemon = new Image("file:images/pokemon_sprites/" + num + ".gif_.gif");
 	}
 
 	public void randomPokemonBack() {
-		num = new Random().nextInt(386) + 1;
+		num = ThreadLocalRandom.current().nextInt(386) + 1;
 		pokemonBack = new Image("file:images/pokemon_back_sprites/" + num + ".png");
 	}
 

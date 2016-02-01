@@ -4,7 +4,7 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 class GameLoop extends AnimationTimer {
 
@@ -17,8 +17,6 @@ class GameLoop extends AnimationTimer {
 	private Emerald e;
 	private ArrayList<String> input;
 	private Battle b = new Battle();
-
-	private final Random rand = new Random();
 
 	//long interval = 70000000;
 
@@ -60,7 +58,7 @@ class GameLoop extends AnimationTimer {
 				e.moveLeft();
 				e.direction = "LEFT";
 
-				int randInt = rand.nextInt(2000) + 1;
+				int randInt = ThreadLocalRandom.current().nextInt(2000) + 1;
 				if (randInt < 10) {
 					isBattle = true;
 				}
@@ -88,7 +86,7 @@ class GameLoop extends AnimationTimer {
 				e.moveRight();
 				e.direction = "RIGHT";
 
-				int randInt = rand.nextInt(2000) + 1;
+				int randInt = ThreadLocalRandom.current().nextInt(2000) + 1;
 				if (randInt < 10) {
 					isBattle = true;
 				}
@@ -116,7 +114,7 @@ class GameLoop extends AnimationTimer {
 				e.moveUp();
 				e.direction = "UP";
 
-				int randInt = rand.nextInt(2000) + 1;
+				int randInt = ThreadLocalRandom.current().nextInt(2000) + 1;
 				if (randInt < 10) {
 					isBattle = true;
 				}
@@ -144,7 +142,7 @@ class GameLoop extends AnimationTimer {
 				e.moveDown();
 				e.direction = "DOWN";
 
-				int randInt = rand.nextInt(2000) + 1;
+				int randInt = ThreadLocalRandom.current().nextInt(2000) + 1;
 				if (randInt < 10) {
 					isBattle = true;
 				}
