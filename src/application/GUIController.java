@@ -1,9 +1,9 @@
 package application;
 
+import javafx.fxml.Initializable;
+
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import javafx.fxml.Initializable;
 
 public class GUIController implements Initializable {
 
@@ -12,11 +12,5 @@ public class GUIController implements Initializable {
 		// TODO Auto-generated method stub
 
 	}
-
-
-
-
-
-
 
 }

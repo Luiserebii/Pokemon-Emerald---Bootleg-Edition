@@ -6,17 +6,16 @@ import javafx.scene.image.Image;
 public class TileEngine {
 
 	int[][] tileMap = {
-
-		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		{0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0},
-		{0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-		{0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-		{0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0},
-		{0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0},
-		{0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-		{0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0},
-		{0, 0, 0, 0, 0, 0, 7, 7, 7, 0, 0, 0, 0, 0, 0},
-		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+			{0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0},
+			{0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
+			{0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
+			{0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0},
+			{0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0},
+			{0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
+			{0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0},
+			{0, 0, 0, 0, 0, 0, 7, 7, 7, 0, 0, 0, 0, 0, 0},
+			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 	}; //tileMap - may move on to text reading method instead
 
 	Image regTile = new Image("file:images/reg_tile_scaled.png");
@@ -26,50 +25,29 @@ public class TileEngine {
 	int tileLength = 48;
 	int tileWidth = 48;
 
-	public void generateTiles(GraphicsContext gc){
+	public void generateTiles(GraphicsContext gc) {
 
 		int mapLength = tileMap.length;
 		int mapWidth = tileMap[0].length;
 
-		for(int i = 0; i < mapLength; i++){ //for each column
-			for(int j = 0; j < mapWidth; j++){ //for each row
-
+		for (int i = 0; i < mapLength; i++) { // for each column
+			for (int j = 0; j < mapWidth; j++) { // for each row
 				//System.out.println(j*tileWidth + "    " + i*tileLength);
 
-				if(tileMap[i][j] == 0){
-
-					gc.drawImage(regTile, j*tileWidth, i*tileLength);
+				if (tileMap[i][j] == 0) {
+					gc.drawImage(regTile, j * tileWidth, i * tileLength);
 				}
-				if(tileMap[i][j] == 1){
-
-					gc.drawImage(grassTile, j*tileWidth, i*tileLength);
+				if (tileMap[i][j] == 1) {
+					gc.drawImage(grassTile, j * tileWidth, i * tileLength);
 				}
-				if(tileMap[i][j] == 7){
-
-					gc.drawImage(flowerTile, j*tileWidth, i*tileLength);
+				if (tileMap[i][j] == 7) {
+					gc.drawImage(flowerTile, j * tileWidth, i * tileLength);
 				}
-
 			}
 		}
-
-
-
-
 	}
 
-
-
-
-
-
-
-	public void readTileMap(){
-
-
-
-
-
+	public void readTileMap() {
 	}
-
 
 }
